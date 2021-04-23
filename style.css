@@ -1,0 +1,128 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x:hidden;
+    color: var(--text-color); 
+}
+
+:root {
+    --header: 100px;
+    --padding: 36px;
+    --header-color: #333;
+    --accent-color: #A6CBBE;
+    --text-color: #333;
+    --white: #fff;
+    --top: 100;
+}
+
+a {
+    text-decoration: none;
+    color: var(--white);
+    transition: color   .5s ease;
+
+}
+
+a:hover {
+    color: var(--accent-color);
+    transition: color .5s ease;
+}
+
+a.big {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 5rem;
+    line-height: 6rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header);
+    padding: 0 var(--padding);
+    background: var(--header-color);
+    color: var(--white);
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding);
+}
+
+/* Hamburger */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+}
+
+.hamburger > .line {
+    height: 2px;
+    margin: 2px;
+    width: 20px;
+    background-color: var(--white);
+    transition: background-color .5s ease;
+}
+
+.hamburger:hover > .line {
+    background-color: var(--accent-color);
+    transition: background-color .5s ease;
+}
+
+/* Nav */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--header-color);
+    height: calc(100vh - var(--header));
+    position: absolute;
+    top: var(--header);
+    left:0;
+    right:0;
+    opacity: 0;
+    transform: translatex(100vw);
+    z-index: var(--top);
+   
+}
+nav > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav > ul > li > a {
+    opacity: 0;
+}
+
+
+
+/* Circle demo */
+.circle {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+.circle svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+/* Stagger demo */
+.button {
+    width: 120px;
+    font-size: 20px;
+    line-height: 22px;
+    opacity: 0.1;
+}
+

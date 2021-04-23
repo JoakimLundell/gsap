@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="">
+        <title>Testing GSAP</title>
+
+        <link rel="stylesheet" href="style.css"> 
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+        
+    </head>
+    <body>
+        <header>
+            
+            <div>Title</div>
+            
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+
+        </header>
+        <section class="center">
+            <nav id="nav">
+                <ul>
+                    <li><a href="/" class="big">Home</a></li>
+                    <li><a href="/" class="big">Example 1</a></li>
+                    <li><a href="/" class="big">Example 2</a></li>
+                    <li><a href="/" class="big">Example 3</a></li>
+                    <li><a href="/" class="big">Example 4</a></li>
+                    <li><a href="/" class="big">Example 5</a></li>
+                </ul>
+            </nav>
+            
+            <h2>Circel demo</h2>
+
+            <div class="circle" id="center">
+                <svg class="red-circle" width="120" height="120">
+                    <circle r="20" cx="60" cy="60" fill="#fd361f" stroke="#fd361f" stroke-width="0"></circle>
+                </svg>
+                <svg class="yellow-circle" width="120" height="120">
+                    <circle r="30" cx="60" cy="60" fill="none" stroke="#fffe03" stroke-width="20"></circle>
+                </svg>
+                <svg class="blue-circle" width="120" height="120">
+                    <circle r="50" cx="60" cy="60" fill="none" stroke="#2a406c" stroke-width="20"></circle>
+                </svg>
+            </div>
+
+            <h2>Stagger demo</h2>
+            <div id="stagger-container">
+                <button class="button">Say</button>
+                <button class="button">Hello</button>
+                <button class="button">To</button>
+                <button class="button">Stagger</button>
+            </div>
+            
+        </section>
+
+        <!-- The GSAP magic -->
+        <script>
+            /* Hamburger */
+            let hamTimeline = gsap.timeline({paused: true, reversed: true})
+                .to(".line:nth-child(1)", {y: 6, ease: "power1.out"}, 0)
+                .to(".line:nth-child(3)", {y: -6, ease: "power1.out"}, 0)
+                .to(".line:nth-child(2)", {opacity: 0, ease: "power1.out"}, 0.1)
+                .to(".line:nth-child(1)", {rotation: -45, ease: "power1.out"}, 0.3)
+                .to(".line:nth-child(3)", {rotation: 45, ease: "power1.out"}, 0.3);
+            
+            let hamburger = document.querySelector(".hamburger");
+            hamburger.addEventListener("click", toggleMenu);
+            
+            function toggleMenu() {
+                
+                if(!hamTimeline.isActive()) {
+                    // Toggle hamburger icon
+                    hamTimeline.reversed() ? hamTimeline.play() : hamTimeline.reverse(); 
+                    // Toggle Nav menu visibility
+                    menuTimeline.reversed() ? menuTimeline.play() : menuTimeline.reverse();
+                }
+            }
+
+
+            /* Nav Menu */
+            let menuTimeline = gsap.timeline({paused: true,reversed: true})
+                .to("#nav", {opacity: 1, x: 0, ease: "power4.in"})
+                .to(".big", {opacity: 1, stagger: 0.1, ease: "power3.in"}, 0.1);
+            
+                /*gsap.to(".big", {opacity: 1, x: 100, duration: 1, reversed: false});*/
+
+            /* Example 1 - Circle */
+            let t1 = gsap.timeline({paused: false, repeat: -1})
+                .to(".circle", {rotationX: 180, transformOrigin:"center", duration: 1, ease: "power1.out", force3D: true})
+                .to(".circle", {rotationY: 180, transformOrigin:"center", duration: 1, ease: "power1.out"},  1)
+                .to(".blue-circle", {rotationX: 180, duration: 1, ease: "power1.out"}, 2)
+                .to(".yellow-circle", {rotationY: 180, duration: 1, ease: "power1.out"}, 3)
+                .to(".red-circle", {rotationX: -180, duration: 1, ease: "power2.out"}, 4);
+
+
+            /* Example x - Staggers */
+            let t2 = gsap.timeline({repeat: -1, repeatDelay: 2});
+            t2.to(".button", {opacity: 1, stagger: 0.5}, 0.5);
+            
+        </script>
+    </body>
+</html>
